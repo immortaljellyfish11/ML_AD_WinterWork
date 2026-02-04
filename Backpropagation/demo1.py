@@ -2,7 +2,7 @@ from backpropagation_EG1 import NeuralNetwork
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-    example = NeuralNetwork(layersize=[2, 4, 4, 1], learning_rate=0.2)
+    example = NeuralNetwork(layersize=[2, 4, 1], learning_rate=0.2)
     train_times = int(input("Please input the training times: "))
 
     # Prob.1:The XOR problem --training data
