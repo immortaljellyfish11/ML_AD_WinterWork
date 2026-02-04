@@ -45,10 +45,3 @@ pip install numpy
 pip install matplotlib
 ```
 
-
-## 📊 Training Results
-
-During training, the following will be displayed:
-- Average loss per epoch
-- Test set accuracy
-- Loss curve visualization
