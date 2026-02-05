@@ -13,19 +13,17 @@ ML_AD_WinterWork/
     └── Loss_result_overTrainingSteps.png  # The Loss curve 
 ```
 
-## 🎯 Project Overview
-
-### Task 1: Backpropagation Algorithm Implementation
+## Task 1: Backpropagation Algorithm Implementation
 
 A implementation of multi-layer neural network with backpropagation algorithm, 
 
-#### NN Module：[backpropagation_EG1.py]
+### NN Module：[backpropagation_EG1.py]
 -  Multi-layer neural network architecture 
 -  Sigmoid activation function and its derivative
 -  Gradient Descent optimizer and weight update
 -  use MSE as the Loss function
 
-#### Demos
+### Demos
 
 **XOR Problem** : [demo1.py]
 - Network architecture: 2-4-1
