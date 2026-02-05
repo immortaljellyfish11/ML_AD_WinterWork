@@ -6,25 +6,23 @@ Machine Learning & Autonomous Driving Winter Work Project
 
 ```
 ML_AD_WinterWork/
-├── README.md                              # Project documentation
+├── README.md                              
 ├── Backpropagation/                       # Backpropagation algorithm implementation
-│   ├── backpropagation_EG1.py            # Core multi-layer neural network
-│   ├── demo1.py                          # XOR and binary classification training script
-    └── Loss_result_overTrainingSteps.png # Training loss curve 
+│   ├── backpropagation_EG1.py             # Core neural network
+│   ├── demo1.py                           # classification training script（XOR）
+    └── Loss_result_overTrainingSteps.png  # The Loss curve 
 ```
 
 ## 🎯 Project Overview
 
 ### Task 1: Backpropagation Algorithm Implementation
 
-A pure Python implementation of multi-layer neural network with backpropagation algorithm, featuring:
+A implementation of multi-layer neural network with backpropagation algorithm, 
 
-#### Core Module：[backpropagation_EG1.py]
+#### NN Module：[backpropagation_EG1.py]
 -  Multi-layer neural network architecture 
 -  Sigmoid activation function and its derivative
--  Forward Propagation
--  Backward Propagation (Backpropagation)
--  Gradient Descent optimizer
+-  Gradient Descent optimizer and weight update
 -  use MSE as the Loss function
 
 #### Demos
@@ -37,7 +35,7 @@ A pure Python implementation of multi-layer neural network with backpropagation 
 ## 🔧 Dependencies
 
 ### Python Version
-- Python 3.7+
+- Python 3.11.7
 
 ### Required Libraries
 ```bash
