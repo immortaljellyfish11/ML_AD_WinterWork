@@ -15,7 +15,7 @@ class NeuralNetwork:
             self.weights.append(weight_matrix)
             bias_vector = [random.uniform(-0.1,0.1) for _ in range(self.layersize[i+1])]
             self.biases.append(bias_vector)
-        # z = W_i*a + b, Where a is activation from previous layer,W_i      
+        # z = W_i*a + b, Where a is activation from previous layer,W_i is weight matrix, b is bias vector     
 
     def sigmoid(self, x):
         return 1 / (1 + math.exp(-x))
@@ -37,7 +37,7 @@ class NeuralNetwork:
             current_input = next_activation
         return self.activations[-1]
     
-    def backward(self,target):
+    def backward(self,target):#  the core part of backpropagation
         output_errors = []
         output = self.activations[-1]
         for i in range(len(output)):
@@ -59,12 +59,13 @@ class NeuralNetwork:
             self.biases[-1][j] += delta_b       
         # propagate errors backward
         for l in range(self.layer_num-3,-1,-1):
-            layer_errors = []
-            for i in range(self.layersize[l+1]):
+            layer_errors = [] 
+            for i in range(self.layersize[l+1]):# we compute the errors for layer l+1
                 error = 0
                 for j in range(self.layersize[l+2]):
                     error += output_errors[j] * self.weights[l+1][j][i]
-                gradient = error * self.dsigmoid(self.activations[l+1][i])
+                gradient = error * self.dsigmoid(self.activations[l+1][i]) 
+                # the gradient for layer l is Sigma{errors^{L+1}}*dsigmoid(activation)
                 layer_errors.append(gradient)
                 for k in range(self.layersize[l]):
                     delta_w = self.learning_rate * gradient * self.activations[l][k]
