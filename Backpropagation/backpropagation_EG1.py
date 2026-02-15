@@ -127,7 +127,7 @@ class NeuralNetwork:
         self.forward(input)
         loss = self.backward(target)
         return loss
-    '''
+    
     def backward_cross_entropy(self, target):
         """
         Backpropagation using Binary Cross Entropy (BCE) loss with sigmoid output.
@@ -193,7 +193,7 @@ class NeuralNetwork:
         self.forward(input)
         loss = self.backward_cross_entropy(target)
         return loss
-'''
+
     def reasoning(self, input):
         output = self.forward(input)
         return output
