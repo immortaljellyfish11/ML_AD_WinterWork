@@ -2,7 +2,7 @@ from backpropagation_EG1 import NeuralNetwork
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-    example = NeuralNetwork(layersize=[2, 4, 1], learning_rate=0.2)
+    example = NeuralNetwork(layersize=[2, 4, 3, 4, 4, 1], learning_rate=0.6, use_relu=True)
     train_times = int(input("Please input the training times: "))
 
     # Prob.1:The XOR problem --training data
@@ -39,17 +39,17 @@ if __name__ == "__main__":
     for i in range(train_times):
         for inputs, target in training_data_XOR:  
             loss += example.train(inputs, target)
-        if i % 100 == 0:
+        if i % 2 == 0:
             loss_plot.append(loss / len(training_data_XOR))
         if i % 1000 ==0:
             print(f"We've trained {i} times.")
         loss = 0
          
     # show a figure of loss
-    plt.plot(range(0, train_times, 100), loss_plot)
+    plt.plot(range(0, train_times, 2), loss_plot)
     plt.xlabel("Training Steps")
     plt.ylabel("Loss")
-    plt.title("Training Loss over Time")
+    plt.title("Training Loss over Time, Training times: "+str(train_times))
     plt.show()
 
     # Test
