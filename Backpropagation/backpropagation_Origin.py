@@ -1,5 +1,6 @@
 import math
 import random
+import pickle
 
 class NeuralNetwork:
     def __init__(self, layersize, learning_rate=0.15, use_relu=False):
@@ -114,13 +115,14 @@ class NeuralNetwork:
                 gradient = error * self.dsigmoid(self.activations[l+1][i]) 
                 # the gradient for layer L is Sigma{errors^{L+1}}*dsigmoid(activation)
                 layer_errors.append(gradient)
-                for k in range(self.layersize[l]):
+                for k in range(len(self.activations[l])):
                     delta_w = self.learning_rate * gradient * self.activations[l][k]
                     self.weights[l][i][k] += delta_w
                 delta_b = self.learning_rate * gradient
                 self.biases[l][i] += delta_b
             # update weights and biases for layer l+1
             output_errors = layer_errors
+            # print(layer_errors, "\n")
         return Loss
 
     def train(self, input, target):
@@ -178,7 +180,7 @@ class NeuralNetwork:
                 gradient = max(min(gradient, 10.0), -10.0)
                 
                 layer_errors.append(gradient)
-                for k in range(self.layersize[l]):
+                for k in range(len(self.activations[l])):
                     delta_w = self.learning_rate * gradient * self.activations[l][k]
                     self.weights[l][i][k] += delta_w
                 delta_b = self.learning_rate * gradient
