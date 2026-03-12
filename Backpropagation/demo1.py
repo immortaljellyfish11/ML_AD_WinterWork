@@ -44,6 +44,7 @@ def normalize_input(sample):
         直径 diameter  : [90, 120]
         甜度 sweetness : [7,  16]
         酸度 acidity   : [4,  10]
+        酸甜比 ratio   : acidity / sweetness
     """
     diameter, sweetness, acidity = sample
 
@@ -52,7 +53,9 @@ def normalize_input(sample):
     sweetness_norm = sweetness/16
     acidity_norm   = acidity/16
 
-    return [diameter_norm, sweetness_norm, acidity_norm]
+    ratio_feature = acidity / sweetness
+
+    return [diameter_norm, sweetness_norm, acidity_norm, ratio_feature]
 
 def normalize_polynomial_input(sample):
     """
@@ -69,10 +72,11 @@ if __name__ == "__main__":
         2: "E:/ML_AD_WinterWork/Backpropagation/model_linesearch_fruit.pkl",  
         3: "E:/ML_AD_WinterWork/Backpropagation/model_linesearch_poly.pkl",    
     }
-
+    random_seed = 42
+    np.random.seed(random_seed)
     LAYERSIZES = {
         1: [2, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1],  
-        2: [3, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1],  
+        2: [4, 14, 14, 14, 14, 1],  
         3: [3, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1],
     }
 
@@ -84,119 +88,53 @@ if __name__ == "__main__":
         ([1, 1], [0])
     ]
     
-    #Prob.2: 二分类任务 -- training data
-    training_data_fruit = [
-    ([105,12,7.2],[1]),
-    ([108,13,7.8],[1]),
-    ([110,14,8.4],[1]),
-    ([112,15,9.0],[1]),
-    ([97,9,5.7],[0]),
-    ([99,10,6.2],[0]),
-    ([101,11,6.7],[0]),
-    ([103,12,7.2],[0]),
-    ([115,16,9.6],[1]),
-    ([118,12,7.2],[1]),
-    ([120,13,7.8],[1]),
-    ([107,14,8.4],[1]),
-    ([109,15,9.0],[1]),
-    ([111,16,9.6],[1]),
-    ([113,12,7.2],[1]),
-    ([116,13,7.8],[1]),
-    ([119,14,8.4],[1]),
-    ([106,15,9.0],[1]),
-    ([114,16,9.6],[1]),
-    ([117,12,7.2],[1]),
-    ([105,13,7.8],[1]),
-    ([108,14,8.4],[1]),
-    ([110,15,9.0],[1]),
-    ([112,16,9.6],[1]),
-    ([115,12,7.2],[1]),
-    ([118,13,7.8],[1]),
-    ([120,14,8.4],[1]),
-    ([107,15,9.0],[1]),
-    ([109,16,9.6],[1]),
-    ([111,12,7.2],[1]),
-    ([113,13,7.8],[1]),
-    ([116,14,8.4],[1]),
-    ([119,15,9.0],[1]),
-    ([114,16,9.6],[1]),
+    # Prob.2: 二分类任务 -- training data（规则驱动 + 均衡采样）
+    # Rule:
+    #   label=1 iff diameter>=105, sweetness in [11,15], acidity/sweetness in [0.55,0.65]
+    training_data_fruit = []
+    ratio_candidates = [0.50, 0.54, 0.58, 0.62, 0.66, 0.70]
 
-    ([90,7,4.5],[0]),
-    ([92,8,5.0],[0]),
-    ([94,9,5.5],[0]),
-    ([96,10,6.0],[0]),
-    ([98,11,6.5],[0]),
-    ([100,12,7.0],[0]),
-    ([102,13,7.5],[0]),
-    ([104,14,8.0],[0]),
-    ([91,15,8.5],[0]),
-    ([93,7,4.8],[0]),
-    ([95,8,5.2],[0]),
+    for diameter in range(90, 121, 2):
+        for sweetness in range(7, 17):
+            for ratio in ratio_candidates:
+                acidity = round(sweetness * ratio, 1)
+                if 4 <= acidity <= 10:
+                    label = 1 if (diameter >= 105 and 11 <= sweetness <= 15 and 0.55 <= ratio <= 0.65) else 0
+                    training_data_fruit.append(([diameter, sweetness, acidity], [label]))
 
-    ([90,7,4.5],[0]),
-    ([92,8,5.0],[0]),
-    ([94,9,5.5],[0]),
-    ([96,10,6.0],[0]),
-    ([98,11,6.5],[0]),
-    ([100,12,7.0],[0]),
-    ([102,13,7.5],[0]),
-    ([104,14,8.0],[0]),
-    ([91,15,8.5],[0]),
-    ([93,7,4.8],[0]),
-    ([95,8,5.2],[0]),
-    ([97,9,5.7],[0]),
-    ([99,10,6.2],[0]),
-    ([101,11,6.7],[0]),
-    ([103,12,7.2],[0]),
+    # 平衡正负样本，避免训练时被多数类主导
+    # 同时加入“困难负例必选”：高直径/高甜度但因规则细节应判负（针对 8-10 类错判）
+    pos_samples = [item for item in training_data_fruit if item[1][0] == 1]
+    neg_samples = [item for item in training_data_fruit if item[1][0] == 0]
 
-    ([90,7,4.5],[0]),
-    ([92,8,5.0],[0]),
-    ([94,9,5.5],[0]),
-    ([96,10,6.0],[0]),
-    ([98,11,6.5],[0]),
-    ([100,12,7.0],[0]),
-    ([102,13,7.5],[0]),
-    ([104,14,8.0],[0]),
-    ([91,15,8.5],[0]),
-    ([93,7,4.8],[0]),
-    ([95,8,5.2],[0]),
-    ([97,9,5.7],[0]),
-    ([99,10,6.2],[0]),
-    ([101,11,6.7],[0]),
-    ([103,12,7.2],[0]),
+    hard_negatives = []
+    for sample in neg_samples:
+        diameter, sweetness, acidity = sample[0]
+        ratio = acidity / sweetness
+        if diameter >= 110 and (
+            sweetness > 15 or ratio < 0.55 or ratio > 0.65
+        ):
+            hard_negatives.append(sample)
 
-    ([90,7,4.5],[0]),
-    ([92,8,5.0],[0]),
-    ([94,9,5.5],[0]),
-    ([96,10,6.0],[0]),
-    ([98,11,6.5],[0]),
-    ([100,12,7.0],[0]),
-    ([102,13,7.5],[0]),
-    ([104,14,8.0],[0]),
-    ([91,15,8.5],[0]),
-    ([93,7,4.8],[0]),
-    ([95,8,5.2],[0]),
-    ([97,9,5.7],[0]),
-    ([99,10,6.2],[0]),
-    ([101,11,6.7],[0]),
-    ([103,12,7.2],[0]),
+    # 去重（按特征）防止困难负例重复进入
+    seen_features = set()
+    hard_negatives_unique = []
+    for sample in hard_negatives:
+        key = tuple(sample[0])
+        if key not in seen_features:
+            seen_features.add(key)
+            hard_negatives_unique.append(sample)
 
-    ([90,7,4.5],[0]),
-    ([92,8,5.0],[0]),
-    ([94,9,5.5],[0]),
-    ([96,10,6.0],[0]),
-    ([98,11,6.5],[0]),
-    ([100,12,7.0],[0]),
-    ([102,13,7.5],[0]),
-    ([104,14,8.0],[0]),
-    ([91,15,8.5],[0]),
-    ([93,7,4.8],[0]),
-    ([95,8,5.2],[0]),
-    ([97,9,5.7],[0]),
-    ([99,10,6.2],[0]),
-    ([101,11,6.7],[0]),
-    ([103,12,7.2],[0]),
-]
+    # 其余负例随机补齐到与正例同量
+    remaining_negatives = [item for item in neg_samples if tuple(item[0]) not in seen_features]
+    np.random.shuffle(pos_samples)
+    np.random.shuffle(remaining_negatives)
+    required_neg_count = len(pos_samples)
+    selected_negatives = hard_negatives_unique + remaining_negatives
+    selected_negatives = selected_negatives[:required_neg_count]
+
+    training_data_fruit = pos_samples[:len(pos_samples)] + selected_negatives
+    np.random.shuffle(training_data_fruit)
     
     # 归一化水果训练数据 / Normalize fruit training data using per-feature min-max scaling
     training_data_fruit_normalized = [(normalize_input(x), y) for x, y in training_data_fruit]
@@ -234,13 +172,29 @@ if __name__ == "__main__":
     #     Prob.2 inference data: fruit (raw feature scale, auto-normalized)
     # Feature format: [直径 diameter (90-120), 甜度 sweetness (7-16), 酸度 acidity (4-10)]
     test_data_fruit_raw = [
-        ([110, 14, 8.4], [1]),   # 预期成熟 / Expected: ripe (1)
-        ([92,   8, 5.0], [0]),   # 预期未熟 / Expected: unripe (0)
-        ([109,  9, 5.7], [0]) ,
-        ([110, 12, 5.9], [0]),
-        ([103, 12, 6.9], [0]),
-        ([107, 10, 6.0], [0]),
-        ([108, 13, 7.7], [1])  
+        # --- 正例（满足三条规则）---
+        ([106, 11, 6.1], [1]),
+        ([110, 13, 7.5], [1]),
+        ([118, 15, 9.2], [1]),
+        ([120, 12, 7.1], [1]),
+
+        # --- 负例：仅违反直径阈值 ---
+        ([104, 12, 7.0], [0]),
+        ([102, 14, 8.0], [0]),
+
+        # --- 负例：仅违反甜度范围 ---
+        ([110, 10, 6.0], [0]),
+        ([115, 16, 9.4], [0]),
+
+        # --- 负例：仅违反酸甜比范围 ---
+        ([112, 13, 6.4], [0]),  # ratio < 0.55
+        ([114, 12, 8.2], [0]),  # ratio > 0.65
+        ([116, 11, 5.5], [0]),  # ratio < 0.55
+        ([106, 14, 6.8], [0]),
+
+        # --- 边界样本（帮助验证阈值是否学到）---
+        ([105, 11, 6.1], [1]),  # 全在边界内
+        ([105, 11, 6.0], [0])   # ratio 略低于下界
     ]
     test_data_fruit = [(normalize_input(x), y) for x, y in test_data_fruit_raw]
 
