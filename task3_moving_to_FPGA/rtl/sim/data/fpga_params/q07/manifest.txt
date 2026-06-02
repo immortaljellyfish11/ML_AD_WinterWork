@@ -1,0 +1,18 @@
+frac_bits=7
+format=readmemh hex two's-complement
+weight_width=8
+bias_width=32
+rtl_note=current edge_cnn_top uses FRAC_BITS=7 by default; q07 matches current RTL directly
+conv_bias_scale=2^(2*frac_bits), because RTL does (raw_sum + bias) >>> FRAC_BITS
+linear_bias_scale=2^frac_bits, because RTL does (acc >>> FRAC_BITS) + bias
+
+Verilator -G 参数示例:
+# 下面路径默认从 task3_moving_to_FPGA/rtl 目录运行 verilator。
+-GCONV1_WEIGHT_FILE='"sim/data/fpga_params/q07/conv1_weight.mem"'
+-GCONV2_WEIGHT_FILE='"sim/data/fpga_params/q07/conv2_weight.mem"'
+-GCONV3_WEIGHT_FILE='"sim/data/fpga_params/q07/conv3_weight.mem"'
+-GLINEAR_WEIGHT_FILE='"sim/data/fpga_params/q07/linear_weight.mem"'
+-GCONV1_BIAS_FILE='"sim/data/fpga_params/q07/conv1_bias.mem"'
+-GCONV2_BIAS_FILE='"sim/data/fpga_params/q07/conv2_bias.mem"'
+-GCONV3_BIAS_FILE='"sim/data/fpga_params/q07/conv3_bias.mem"'
+-GLINEAR_BIAS_FILE='"sim/data/fpga_params/q07/linear_bias.mem"'
