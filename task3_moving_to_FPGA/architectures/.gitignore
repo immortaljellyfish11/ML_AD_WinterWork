@@ -1,0 +1,34 @@
+__pycache__/
+*.py[cod]
+*/artifacts/checkpoints/
+# Vivado projects / generated runs
+**/*.xpr
+**/*.jou
+**/*.log
+**/*.str
+**/*.wdb
+**/*.wcfg
+**/*.dcp
+**/*.rpt
+**/*.pb
+**/*.rpx
+**/*.xml
+**/*.html
+
+**/.Xil/
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
+**/*.sim/
+**/*.runs/
+**/*.gen/
+**/.jobs/
+**/*_usage_statistics_webtalk.*
+**/project_*/
+
+# XSim / Vivado temporary files
+**/xsim.dir/
+**/xsimk*
+**/xelab.pb
+**/xvlog.pb
+**/webtalk*

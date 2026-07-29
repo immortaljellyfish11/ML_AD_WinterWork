@@ -1,0 +1,42 @@
+[
+  {
+    "name": "D1 Baseline",
+    "fp32": 81.53,
+    "int8": 81.52000000000001,
+    "parameter_count": 94538,
+    "macs_per_image": 10323200,
+    "lut": 2262
+  },
+  {
+    "name": "D2 Small",
+    "fp32": 76.75,
+    "int8": 76.51,
+    "parameter_count": 24234,
+    "macs_per_image": 2802304,
+    "lut": 2296
+  },
+  {
+    "name": "D3 VGG-like",
+    "fp32": 86.55000000000001,
+    "int8": 85.26,
+    "parameter_count": 140714,
+    "macs_per_image": 29197568,
+    "lut": 8229
+  },
+  {
+    "name": "D4 ResNet-20",
+    "fp32": 91.36999999999999,
+    "int8": 90.16,
+    "parameter_count": 272474,
+    "macs_per_image": 40813184,
+    "lut": null
+  },
+  {
+    "name": "D5 MobileNet-0.5x",
+    "fp32": 88.2,
+    "int8": 87.64,
+    "parameter_count": 823722,
+    "macs_per_image": 12167168,
+    "lut": null
+  }
+]

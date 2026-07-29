@@ -1,0 +1,14 @@
+{
+  "architecture_revision": "unspecified",
+  "accuracy_source": "measured_fp32_and_int8_ptq_test",
+  "parameter_count": 24234,
+  "macs_per_image": 2802304,
+  "best_val_accuracy": 0.7857333333333333,
+  "fp32_test_accuracy": 0.7779,
+  "fp32_test_loss": 0.6456770128250122,
+  "training_seconds": 577.4513335227966,
+  "epochs": 150,
+  "seed": 9,
+  "int8_test_accuracy": 0.767,
+  "int8_accuracy_drop": 0.01090000000000002
+}

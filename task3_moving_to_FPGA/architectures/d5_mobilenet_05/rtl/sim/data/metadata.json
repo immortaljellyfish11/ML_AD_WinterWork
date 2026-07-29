@@ -1,0 +1,14 @@
+{
+  "design_id": "D5",
+  "samples": 1,
+  "quantization_file": "E:\\ML_AD_WinterWork\\task3_moving_to_FPGA\\architectures\\d5_mobilenet_05\\artifacts\\int8_params\\quantization.json",
+  "architecture_revision": "2026-07-28-two-256-256-blocks",
+  "evaluation_status": "trained_checkpoint",
+  "weights_provenance": "trained CIFAR-10 checkpoint",
+  "checkpoint": "architectures\\d5_mobilenet_05\\artifacts\\checkpoints\\best.pth",
+  "checkpoint_accuracy_source": "measured_fp32_test",
+  "checkpoint_fp32_test_accuracy": 0.887,
+  "checkpoint_best_val_accuracy": 0.8958666666666667,
+  "checkpoint_epochs": 150,
+  "checkpoint_seed": 9
+}

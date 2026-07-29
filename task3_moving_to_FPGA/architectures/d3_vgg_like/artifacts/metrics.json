@@ -1,0 +1,23 @@
+{
+  "architecture_revision": "2026-07-28-16-32-64-128",
+  "accuracy_source": "measured_fp32_and_int8_ptq_test",
+  "parameter_count": 98730,
+  "macs_per_image": 28755200,
+  "best_val_accuracy": 0.8401333333333333,
+  "fp32_test_accuracy": 0.8347,
+  "fp32_test_loss": 0.492442506313324,
+  "training_seconds": 1702.083726644516,
+  "epochs": 150,
+  "seed": 9,
+  "int8_test_accuracy": 0.8043,
+  "int8_accuracy_drop": 0.030399999999999983,
+  "vivado_post_route": {
+    "lut": 2604,
+    "dsp48": 4,
+    "bram36_tiles": 27,
+    "clock_mhz": 100,
+    "wns_ns": -0.537,
+    "tns_ns": -5.558,
+    "source": "rtl/sys/reports/*_route.rpt (2026-07-29)"
+  }
+}

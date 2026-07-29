@@ -1,0 +1,15 @@
+scheme=per-layer symmetric INT8 PTQ
+weight_width=8
+activation_width=8
+bias_width=32
+accumulator_width=32
+rounding=nearest; ties away from zero
+relu_saturation=[0,127]
+conv1_requant_multiplier=36632
+conv1_requant_shift=24
+conv2_requant_multiplier=79955
+conv2_requant_shift=24
+conv3_requant_multiplier=112743
+conv3_requant_shift=24
+linear_requant_multiplier=1
+linear_requant_shift=0

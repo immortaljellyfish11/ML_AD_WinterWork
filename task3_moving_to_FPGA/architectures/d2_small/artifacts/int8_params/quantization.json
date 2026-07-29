@@ -1,0 +1,84 @@
+{
+  "scheme": "per-layer symmetric INT8 PTQ",
+  "architecture_revision": "unspecified",
+  "evaluation_status": "not_evaluated",
+  "calibration": {
+    "source": "CIFAR-10 validation split",
+    "samples": 2048,
+    "method": "sampled absolute percentile",
+    "activation_percentile": 99.9
+  },
+  "activation_maxima": {
+    "input": 2.12648868560791,
+    "conv1": 24.47283172607422,
+    "conv2": 58.617740631103516,
+    "conv3": 63.11251449584961,
+    "pool1": 24.47283172607422,
+    "pool2": 58.617740631103516,
+    "gap": 15.533246994018555
+  },
+  "activation_thresholds": {
+    "input": 2.12648868560791,
+    "conv1": 12.687355041503906,
+    "conv2": 22.096220016479492,
+    "conv3": 17.504825592041016,
+    "pool1": 13.801427841186523,
+    "pool2": 26.651042938232422,
+    "gap": 6.847467422485352
+  },
+  "activation_scales": {
+    "input": 0.016744005398487482,
+    "conv1": 0.09990043339766855,
+    "conv2": 0.1739859843817283,
+    "conv3": 0.13783327237827572,
+    "pool1": 0.10867266016682302,
+    "pool2": 0.20985073179710567,
+    "gap": 0.0539170663187823
+  },
+  "layers": {
+    "conv1": {
+      "input_scale": 0.016744005398487482,
+      "weight_scale": 0.013027261561296117,
+      "bias_scale": 0.00021812853790985064,
+      "output_scale": 0.09990043339766855,
+      "requant_multiplier": 36632,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "conv2": {
+      "input_scale": 0.10867266016682302,
+      "weight_scale": 0.007629877938998966,
+      "bias_scale": 0.0008291591323791746,
+      "output_scale": 0.1739859843817283,
+      "requant_multiplier": 79955,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "conv3": {
+      "input_scale": 0.20985073179710567,
+      "weight_scale": 0.004413816403216264,
+      "bias_scale": 0.0009262426022330019,
+      "output_scale": 0.13783327237827572,
+      "requant_multiplier": 112743,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "linear": {
+      "input_scale": 0.0539170663187823,
+      "weight_scale": 0.011235983352961504,
+      "bias_scale": 0.0006058112595983592,
+      "output_scale": 0.0006058112595983592,
+      "requant_multiplier": 1,
+      "requant_shift": 0
+    }
+  }
+}

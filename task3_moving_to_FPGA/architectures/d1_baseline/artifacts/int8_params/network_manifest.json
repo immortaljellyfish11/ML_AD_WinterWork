@@ -1,0 +1,199 @@
+{
+  "format": "readmemh two's-complement",
+  "quantization": {
+    "weight_bits": 8,
+    "activation_bits": 8,
+    "accumulator_bits": 32,
+    "frac_bits": 7
+  },
+  "bias_scale": {
+    "convolution": "2^(2*7)",
+    "linear": "2^7"
+  },
+  "topology": [
+    {
+      "name": "conv1",
+      "op": "conv3x3_relu",
+      "input": [
+        3,
+        32,
+        32
+      ],
+      "output": [
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "name": "pool1",
+      "op": "maxpool2x2",
+      "input": [
+        32,
+        32,
+        32
+      ],
+      "output": [
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "name": "conv2",
+      "op": "conv3x3_relu",
+      "input": [
+        32,
+        16,
+        16
+      ],
+      "output": [
+        64,
+        16,
+        16
+      ]
+    },
+    {
+      "name": "pool2",
+      "op": "maxpool2x2",
+      "input": [
+        64,
+        16,
+        16
+      ],
+      "output": [
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "conv3",
+      "op": "conv3x3_relu",
+      "input": [
+        64,
+        8,
+        8
+      ],
+      "output": [
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "gap",
+      "op": "global_average_pool",
+      "input": [
+        128,
+        8,
+        8
+      ],
+      "output": [
+        128,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "linear",
+      "op": "linear",
+      "input": [
+        128
+      ],
+      "output": [
+        10
+      ]
+    }
+  ],
+  "parameter_layers": [
+    {
+      "name": "conv1",
+      "kind": "conv2d",
+      "weight_file": "conv1_weight.mem",
+      "bias_file": "conv1_bias.mem",
+      "weight_shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "bias_shape": [
+        32
+      ],
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "groups": 1
+    },
+    {
+      "name": "conv2",
+      "kind": "conv2d",
+      "weight_file": "conv2_weight.mem",
+      "bias_file": "conv2_bias.mem",
+      "weight_shape": [
+        64,
+        32,
+        3,
+        3
+      ],
+      "bias_shape": [
+        64
+      ],
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "groups": 1
+    },
+    {
+      "name": "conv3",
+      "kind": "conv2d",
+      "weight_file": "conv3_weight.mem",
+      "bias_file": "conv3_bias.mem",
+      "weight_shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "bias_shape": [
+        128
+      ],
+      "stride": [
+        1,
+        1
+      ],
+      "padding": [
+        1,
+        1
+      ],
+      "groups": 1
+    },
+    {
+      "name": "linear",
+      "kind": "linear",
+      "weight_file": "linear_weight.mem",
+      "bias_file": "linear_bias.mem",
+      "weight_shape": [
+        10,
+        128
+      ],
+      "bias_shape": [
+        10
+      ],
+      "stride": null,
+      "padding": null,
+      "groups": null
+    }
+  ]
+}

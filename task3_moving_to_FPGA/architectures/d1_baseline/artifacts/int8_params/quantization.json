@@ -1,0 +1,106 @@
+{
+  "scheme": "per-layer symmetric INT8 PTQ",
+  "architecture_revision": "2026-07-28-conv256",
+  "evaluation_status": "trained_checkpoint",
+  "weights_provenance": "trained CIFAR-10 checkpoint",
+  "calibration": {
+    "source": "CIFAR-10 validation split",
+    "samples": 2048,
+    "method": "sampled absolute percentile",
+    "activation_percentile": 99.9
+  },
+  "activation_maxima": {
+    "input": 2.12648868560791,
+    "conv1": 18.888750076293945,
+    "conv2": 34.32988357543945,
+    "conv3": 65.60444641113281,
+    "conv4": 46.58037567138672,
+    "pool1": 18.888750076293945,
+    "pool2": 34.32988357543945,
+    "gap": 9.946178436279297
+  },
+  "activation_thresholds": {
+    "input": 2.12648868560791,
+    "conv1": 8.15616226196289,
+    "conv2": 12.474320411682129,
+    "conv3": 12.148736953735352,
+    "conv4": 4.727509498596191,
+    "pool1": 9.461536407470703,
+    "pool2": 14.870524406433105,
+    "gap": 4.794138431549072
+  },
+  "activation_scales": {
+    "input": 0.016744005398487482,
+    "conv1": 0.06422175009419599,
+    "conv2": 0.09822299536757582,
+    "conv3": 0.09565934609240434,
+    "conv4": 0.037224484240914894,
+    "pool1": 0.07450028667299766,
+    "pool2": 0.11709074335774099,
+    "gap": 0.03774912150826041
+  },
+  "layers": {
+    "conv1": {
+      "input_scale": 0.016744005398487482,
+      "weight_scale": 0.010219495127520224,
+      "bias_scale": 0.00017111528158501516,
+      "output_scale": 0.06422175009419599,
+      "requant_multiplier": 44702,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "conv2": {
+      "input_scale": 0.07450028667299766,
+      "weight_scale": 0.0049797197965186415,
+      "bias_scale": 0.00037099055239184036,
+      "output_scale": 0.09822299536757582,
+      "requant_multiplier": 63368,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "conv3": {
+      "input_scale": 0.11709074335774099,
+      "weight_scale": 0.0025036755039935976,
+      "bias_scale": 0.00029315722588917715,
+      "output_scale": 0.09565934609240434,
+      "requant_multiplier": 51415,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "conv4": {
+      "input_scale": 0.09565934609240434,
+      "weight_scale": 0.001305774088919632,
+      "bias_scale": 0.00012490949549045705,
+      "output_scale": 0.037224484240914894,
+      "requant_multiplier": 56297,
+      "requant_shift": 24,
+      "stride": 1,
+      "padding": 1,
+      "groups": 1,
+      "relu": true
+    },
+    "linear": {
+      "input_scale": 0.03774912150826041,
+      "weight_scale": 0.007366237677927092,
+      "bias_scale": 0.0002780690011627958,
+      "output_scale": 0.0002780690011627958,
+      "requant_multiplier": 1,
+      "requant_shift": 0
+    }
+  },
+  "checkpoint": "architectures\\d1_baseline\\artifacts\\checkpoints\\best.pth",
+  "checkpoint_accuracy_source": "measured_fp32_test",
+  "checkpoint_fp32_test_accuracy": 0.8529,
+  "checkpoint_best_val_accuracy": 0.8644,
+  "checkpoint_epochs": 150,
+  "checkpoint_seed": 9
+}

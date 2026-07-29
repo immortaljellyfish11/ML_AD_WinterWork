@@ -1,0 +1,12 @@
+{
+  "implementation_status": "verilator_verified",
+  "required_top": "d2_small_top",
+  "target_part": "xc7z010clg400-1",
+  "lint_status": "PASS on 2026-07-22",
+  "full_integer_vector_status": "PASS: class=3, max_logit=5289, cycles=5811559",
+  "test_script": "rtl/sim/build_and_run.sh",
+  "vivado_xsim_status": "PASS",
+  "vivado_synth_route_status": "PASS; 100 MHz timing constraint not met, WNS=-0.652 ns",
+  "test_command": "C:\\cygwin64\\bin\\bash.exe rtl/sim/build_and_run.sh",
+  "vivado_command": "D:\\appinstallroot\\XILINX\\Vivado\\2024.2\\bin\\vivado.bat -mode batch -source rtl/sys/run_all.tcl"
+}

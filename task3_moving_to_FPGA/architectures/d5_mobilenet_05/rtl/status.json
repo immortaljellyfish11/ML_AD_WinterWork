@@ -1,0 +1,21 @@
+{
+  "implementation_status": "external_weight_sequencer_verilator_xsim_and_vivado_route_verified",
+  "rtl_status": "external_weight_sequencer_only_no_on_chip_full_weight_image",
+  "required_top": "d5_mobilenet_05_top",
+  "required_operators": ["conv3x3", "depthwise_conv3x3", "pointwise_conv1x1", "relu", "global_average_pool", "linear"],
+  "parameter_count": 617130,
+  "int8_parameter_bytes": 625032,
+  "estimated_parameter_bram36_tiles": 135.64,
+  "hardware_limit_bram36_tiles": 60,
+  "reason": "The ten-block model has 617,130 trainable FP32 parameters. Its deployed folded INT8 image uses 609,248 INT8 weights plus 3,946 INT32 biases (625,032 bytes), exceeding XC7Z010 BRAM36 capacity before feature buffers.",
+  "vivado_descriptor_route": {
+    "lut": 68,
+    "dsp48": 0,
+    "bram36_tiles": 0,
+    "clock_mhz": 100,
+    "wns_ns": 4.229,
+    "source": "rtl/sys/reports/*_route.rpt (2026-07-29)",
+    "scope": "descriptor sequencer only; excludes external weight storage and all convolution/data-path engines"
+  },
+  "next_step": "Connect the verified descriptor sequencer to the tiled external-weight depthwise/pointwise accelerator."
+}

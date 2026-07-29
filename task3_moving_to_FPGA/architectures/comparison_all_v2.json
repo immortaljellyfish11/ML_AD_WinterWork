@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D1",
+    "name": "Baseline+256",
+    "fp32": 85.28999999999999,
+    "int8": 81.34,
+    "parameter_count": 390986,
+    "accuracy_source": "measured",
+    "resource_source": "synthesized",
+    "on_chip_bram36": 85.168,
+    "lut": 2945.0,
+    "dsp": 4.0
+  },
+  {
+    "id": "D2",
+    "name": "Small",
+    "fp32": 77.79,
+    "int8": 76.7,
+    "parameter_count": 24234,
+    "accuracy_source": "measured",
+    "resource_source": "measured",
+    "on_chip_bram36": 5.339,
+    "lut": 2296,
+    "dsp": 3
+  },
+  {
+    "id": "D3",
+    "name": "VGG-like",
+    "fp32": 83.47,
+    "int8": 80.43,
+    "parameter_count": 98730,
+    "accuracy_source": "measured",
+    "resource_source": "measured",
+    "on_chip_bram36": 21.589,
+    "lut": 2604.0,
+    "dsp": 4.0
+  },
+  {
+    "id": "D4",
+    "name": "ResNet-20",
+    "fp32": 91.12,
+    "int8": 90.21000000000001,
+    "parameter_count": 272474,
+    "accuracy_source": "measured",
+    "resource_source": "estimated",
+    "on_chip_bram36": 59.477,
+    "lut": 6800,
+    "dsp": 5
+  },
+  {
+    "id": "D5",
+    "name": "MobileNet-0.5x",
+    "fp32": 88.7,
+    "int8": 88.0,
+    "parameter_count": 617130,
+    "accuracy_source": "measured",
+    "resource_source": "estimated",
+    "on_chip_bram36": 135.641,
+    "lut": 5600,
+    "dsp": 4
+  }
+]

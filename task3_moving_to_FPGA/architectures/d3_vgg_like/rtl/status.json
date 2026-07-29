@@ -1,0 +1,12 @@
+{
+  "implementation_status": "verilator_verified",
+  "required_top": "d3_vgg_like_top",
+  "target_part": "xc7z010clg400-1",
+  "lint_status": "PASS on 2026-07-22",
+  "full_integer_vector_status": "PASS: class=3, max_logit=7427, cycles=59054769",
+  "test_script": "rtl/sim/build_and_run.sh",
+  "vivado_xsim_status": "PASS",
+  "vivado_synth_route_status": "PASS after Conv4 distributed-ROM mapping; 100 MHz WNS=-1.259 ns",
+  "test_command": "C:\\cygwin64\\bin\\bash.exe rtl/sim/build_and_run.sh",
+  "vivado_command": "D:\\appinstallroot\\XILINX\\Vivado\\2024.2\\bin\\vivado.bat -mode batch -source rtl/sys/run_all.tcl"
+}

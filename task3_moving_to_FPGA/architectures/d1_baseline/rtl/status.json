@@ -1,0 +1,15 @@
+{
+  "implementation_status": "verilator_verified_and_vivado_routed",
+  "rtl_location": "../../../rtl",
+  "top_module": "edge_cnn_top",
+  "testbench": "../../../rtl/tb/tb_edge_cnn_top.cpp",
+  "verified_scope": "One or more generated CIFAR-10 vectors compared against the RTL-aligned Python golden model.",
+  "measured_core_cycles": 21060263,
+  "last_verified_result": "PASS: class_id=3, max_logit=6197",
+  "test_command": "C:\\cygwin64\\bin\\bash.exe -lc \"cd /cygdrive/e/ML_AD_WinterWork/task3_moving_to_FPGA/rtl && ./build/obj_edge_cnn_top/Vedge_cnn_top\"",
+  "notes": [
+    "D1 RTL now uses per-layer INT8 scales with INT32 bias and accumulation.",
+    "The full 10,000-image integer-reference accuracy is 81.52%; full-dataset Verilator execution was not required.",
+    "Vivado 2024.2.2 post-route timing meets 100 MHz with WNS 0.006 ns on xc7z010clg400-1."
+  ]
+}

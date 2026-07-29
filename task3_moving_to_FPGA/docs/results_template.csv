@@ -1,0 +1,6 @@
+design,int8_accuracy,fp32_accuracy,parameters,macs,lut,dsp,bram36_equivalent,fmax_mhz,core_cycles,end_to_end_cycles,core_images_per_second,vivado_part,vivado_version,notes
+D1,0.8152,0.8153,94538,10323200,2262,3,43,100.06,21060263,,4.748279,xc7z010clg400-1,2024.2.2,"core post-route: 100 MHz met with WNS 0.006 ns; UART board top separately deployed at 50 MHz with 2399 LUT, 3 DSP, 43 BRAM"
+D2,,,24234,2802304,,,,,,,,,,
+D3,,,140714,29197568,,,,,,,,,,
+D4,,,272474,40813184,,,,,,,,,,
+D5,,,823722,12167168,,,,,,,,,,

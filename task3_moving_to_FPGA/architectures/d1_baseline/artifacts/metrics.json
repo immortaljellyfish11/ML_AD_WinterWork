@@ -1,0 +1,22 @@
+{
+  "architecture_revision": "2026-07-28-conv256",
+  "accuracy_source": "measured_fp32_and_int8_ptq_test",
+  "parameter_count": 390986,
+  "macs_per_image": 29198848,
+  "best_val_accuracy": 0.8644,
+  "fp32_test_accuracy": 0.8529,
+  "fp32_test_loss": 0.4394071442604065,
+  "training_seconds": 1751.7574174404144,
+  "epochs": 150,
+  "seed": 9,
+  "int8_test_accuracy": 0.8134,
+  "int8_accuracy_drop": 0.03949999999999998,
+  "vivado_synthesis": {
+    "lut": 2945,
+    "dsp48": 4,
+    "bram36_tiles": 121.5,
+    "clock_mhz": 100,
+    "implementation_status": "place_failed_bram_overutilization",
+    "source": "rtl/sys/reports/d1_utilization_synth.rpt (2026-07-29)"
+  }
+}

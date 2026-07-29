@@ -1,0 +1,3 @@
+`ifndef GENERATED_RTL_PARAMS_VH
+`define GENERATED_RTL_PARAMS_VH
+`endif

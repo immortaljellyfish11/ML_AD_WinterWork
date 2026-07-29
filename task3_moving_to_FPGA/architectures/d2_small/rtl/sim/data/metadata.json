@@ -1,0 +1,5 @@
+{
+  "design_id": "D2",
+  "samples": 1,
+  "quantization_file": "E:\\ML_AD_WinterWork\\task3_moving_to_FPGA\\architectures\\d2_small\\artifacts\\int8_params\\quantization.json"
+}

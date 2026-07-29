@@ -1,0 +1,12 @@
+{
+  "implementation_status": "software_ptq_verified",
+  "rtl_status": "blocked_by_xc7z010_on_chip_parameter_capacity",
+  "required_top": "d4_resnet20_top",
+  "required_operators": ["conv3x3", "conv1x1", "residual_add", "relu", "global_average_pool", "linear"],
+  "parameter_count": 272474,
+  "int8_parameter_bytes": 272474,
+  "estimated_parameter_bram36_tiles": 59.1,
+  "hardware_limit_bram36_tiles": 60,
+  "reason": "Weights alone nearly consume all XC7Z010 BRAM36; feature buffers and bias storage require additional memory.",
+  "next_step": "Use external DDR or tiled weight loading, then implement and verify the residual RTL controller."
+}

@@ -1,0 +1,21 @@
+{
+  "design_id": "D3",
+  "architecture_revision": "2026-07-28-16-32-64-128",
+  "name": "vgg_like_16_32_64_128",
+  "description": "Four-convolution VGG-like CIFAR-10 network with 16→32→64→128 channels and no runtime batch normalization.",
+  "input_shape": [3, 32, 32],
+  "training": {"epochs": 150, "batch_size": 128, "learning_rate": 0.01, "momentum": 0.9, "weight_decay": 0.0005, "val_size": 7500, "seed": 9},
+  "evaluation": {"batch_size": 256, "test_samples": 10000},
+  "quantization": {"scheme": "per-layer symmetric INT8 PTQ", "weight_bits": 8, "activation_bits": 8, "bias_bits": 32, "accumulator_bits": 32, "calibration_samples": 2048, "activation_percentile": 99.9, "rounding": "nearest, ties away from zero", "saturation": "weights/inputs [-127,127], ReLU output [0,127]"},
+  "paths": {"data_root": "../../cifar-10-batches-py", "checkpoint": "artifacts/checkpoints/best.pth", "int8_export": "artifacts/int8_params"},
+  "topology": [
+    {"name": "conv1", "op": "conv3x3_relu", "input": [3, 32, 32], "output": [16, 32, 32]},
+    {"name": "conv2", "op": "conv3x3_relu", "input": [16, 32, 32], "output": [32, 32, 32]},
+    {"name": "pool1", "op": "maxpool2x2", "input": [32, 32, 32], "output": [32, 16, 16]},
+    {"name": "conv3", "op": "conv3x3_relu", "input": [32, 16, 16], "output": [64, 16, 16]},
+    {"name": "conv4", "op": "conv3x3_relu", "input": [64, 16, 16], "output": [128, 16, 16]},
+    {"name": "pool2", "op": "maxpool2x2", "input": [128, 16, 16], "output": [128, 8, 8]},
+    {"name": "gap", "op": "global_average_pool", "input": [128, 8, 8], "output": [128, 1, 1]},
+    {"name": "linear", "op": "linear", "input": [128], "output": [10]}
+  ]
+}

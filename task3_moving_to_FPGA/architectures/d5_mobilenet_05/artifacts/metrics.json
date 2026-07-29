@@ -1,0 +1,14 @@
+{
+  "architecture_revision": "2026-07-28-two-256-256-blocks",
+  "accuracy_source": "measured_fp32_and_int8_ptq_test",
+  "parameter_count": 617130,
+  "macs_per_image": 8910848,
+  "best_val_accuracy": 0.8958666666666667,
+  "fp32_test_accuracy": 0.887,
+  "fp32_test_loss": 0.44584124126434327,
+  "training_seconds": 1439.5610702037811,
+  "epochs": 150,
+  "seed": 9,
+  "int8_test_accuracy": 0.88,
+  "int8_accuracy_drop": 0.007000000000000006
+}
